@@ -40,7 +40,6 @@ void numbermatch(const char *number)
 	struct tm *tm;
 #endif
 
-
 	status = regcomp(&reg, PATTERN, REG_EXTENDED|REG_ICASE);
 	if(status < 0) {
 		regerror(err, &reg, errbuf, sizeof(errbuf));
@@ -49,7 +48,7 @@ void numbermatch(const char *number)
 
 	status = regexec(&reg, number, nmatch, pmatch, 0);
 	if (status == REG_NOMATCH) {
-		printf("No Match \n");
+		printf("Match Over\n");
 	} else if(status == 0) {
 		// check area
 		area_number = (number[pmatch[0].rm_so]-48)* 10 + (number[pmatch[0].rm_so+1]-48);
