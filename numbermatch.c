@@ -50,7 +50,7 @@ void numbermatch(const char *number)
 	if (status == REG_NOMATCH) {
 		printf("Match Over\n");
 	} else if(status == 0) {
-		// check area
+		// check area number
 		area_number = (number[pmatch[0].rm_so]-48)* 10 + (number[pmatch[0].rm_so+1]-48);
 		if(area[area_number] == 0) {
 			printf("area is %d, wrong! offset is %d\n", area_number, offset_store + pmatch[0].rm_so);
@@ -58,7 +58,7 @@ void numbermatch(const char *number)
 			numbermatch(number+pmatch[0].rm_so+1);
 		} else {
 #ifdef YEAR
-			//check year
+			//check year number
 			time(&now);
 			tm = localtime(&now);
 	
@@ -69,14 +69,14 @@ void numbermatch(const char *number)
 				numbermatch(number+pmatch[0].rm_so+1);
 			} else {
 #endif
-				// check month
+				// check month number
 				month = (number[pmatch[0].rm_so+10]-48)*10 + (number[pmatch[0].rm_so+11]-48);
 				if(month > 12 || month == 0) {
 					printf("month is %d, wrong! offset is %d\n", month, offset_store + pmatch[0].rm_so);
 					offset_store += pmatch[0].rm_so+1;
 					numbermatch(number+pmatch[0].rm_so+1);
 				} else {
-					//check day
+					//check day number
 					day = (number[pmatch[0].rm_so+12]-48)*10 + (number[pmatch[0].rm_so+13]-48);
 					if(day > 31 || day == 0) {
 						printf("day is %d, wrong! offset is %d\n", day, offset_store + pmatch[0].rm_so);
@@ -91,7 +91,7 @@ void numbermatch(const char *number)
 							offset_store += pmatch[0].rm_so+1;
 							numbermatch(number+pmatch[0].rm_so+1);
 						} else {
-							// check over
+							// confirm ID number
 							printf("***this is a ID number! offset is %d***\n", offset_store + pmatch[0].rm_so);
 							offset_store += pmatch[0].rm_eo;
 							numbermatch(number+pmatch[0].rm_eo);
