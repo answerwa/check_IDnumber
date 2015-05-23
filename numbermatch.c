@@ -106,7 +106,6 @@ void numbermatch(const char *number)
 		regerror(err, &reg, errbuf, sizeof(errbuf));
 		printf("err:%s\n", errbuf);
 	}
-
 	regfree(&reg);
 }
 
